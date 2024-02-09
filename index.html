@@ -7,13 +7,53 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <h1>Super Bingo</h1>
-    <h2 id="score">0</h2>
 
-    <!-- 3x3 board -->
-    <div id="board">
-        
+    <div id="main">
+      <h1>Super Bingo</h1>
+      <h2 id="score">0</h2>
+
+      
+      <!-- 3x3 board -->
+      <div id="board">
+        <div id="matrix"></div>
+      </div>
     </div>
-    <script> </script>
+    
+
+    <div id="container">
+        <h1>Super Bingo</h1>
+        <form id="setupForm">
+            <label for="player1">Jugador 1:</label>
+            <input type="text" id="player1" required>
+            
+            <label for="player2">Jugador 2:</label>
+            <input type="text" id="player2" required>
+            
+            <label for="player3">Jugador 3:</label>
+            <input type="text" id="player3" required>
+            
+            <label for="player4">Jugador 4:</label>
+            <input type="text" id="player4" required>
+            
+            <label for="boardSize">Tamaño de cartas (3-5):</label>
+            <input type="number" id="boardSize" min="3" max="5" required>
+            
+            <button type="submit" id="startGame">Start Game</button>
+        </form>
+    </div>
+
+    <!-- <div id="juego">
+        <div class="carton cartonJugador">
+          <div class="etiqueta">Player</div>
+        </div>
+        <div id="bingo">
+          <div id="bola"></div>
+          <button onClick="sacarBola();">SACAR BOLA</button>
+        </div>
+        <div class="carton cartonCpu">
+          <div class="etiqueta">CPU</div></div>
+      </div> -->
+
+    <script src="bingo.js"> </script>
 </body>
 </html>

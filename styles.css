@@ -1,18 +1,133 @@
 body{
-    background: rgba(131, 79, 79, 0.514);
+    /* background: linear-gradient(to bottom right, #33475b, #0033CC, #FF77CC, rgb(255, 122, 89)); */
+    background: linear-gradient(to right, #0f0c29 0%,#302b63 100%);
+    /*background: url(./img/fondo.jpg); */
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #board{
     height: 540px;
-    width: 540px;
-    background-color: aquamarine;
+    max-width: 100%;
+    background-color: #83b8aa;
     margin: 0 auto;
-    display: flex;
+    display: none;
     flex-wrap: wrap;
-
     border: 3px solid white;
-    border-radius: 25px;
+    border-radius: 15px;
 
+} 
+
+@media (min-width: 600px) {
+  #board {
+      max-width: 30%; 
+  }
 }
+
+#matrix{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 10px 5px;
+}
+
+.token{
+    border: 1px solid white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    color: #fff;
+}
+
+#main{
+    display: none;
+}
+
+h1, h2 {
+    color: whitesmoke;
+    display: block;
+}
+
+#container h1 {
+    color: black; /*Cambiar el color del texto*/
+}
+
+#container {
+    max-width: 600px;
+    margin: 10% auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, button {
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+
+/* #juego{
+    display:flex;
+    width: 800px;
+    margin: auto;
+  }
+  
+  #juego > div{
+    border:1px solid #000;
+    width: 33%;
+  }
+  .carton{
+    margin:auto;
+    text-align: center;
+  }
+  .numero{
+    display:inline-block;
+    border:1px solid #000;
+    width: 45px;
+    line-height: 45px;
+    margin: 1px;
+    text-align:center;  
+  }
+  .tachado{
+    color: #fff;
+    background-color: #000;
+    
+  }
+  #bingo{
+    text-align: center;
+  }
+  #bola{
+    font-size:50px;
+    display:block;
+    margin: 20px auto;
+    width: 5rem;
+    line-height: 5rem;
+    border-radius: 50%;
+    background-color: #000;
+    color: #FFF;
+    text-align:center;
+  }
+  .etiqueta{
+    text-align:center;
+    margin: 10px auto;
+  } */
