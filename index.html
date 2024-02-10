@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="header">
-    <h1>Super Bingo</h1>
+    <h1 id="title-game">Super Bingo</h1>
     <h2 id="turn">Turno: 0</h2>
 
   </div>
@@ -25,7 +25,7 @@
             </tr>
           </thead>
           <tbody id="players-table">
-            <tr>
+            <!-- <tr>
               <td data-title="Nombre"> Not Editable </td>
               <td data-title=""> 0 </td>
               <td data-title=""> 0 </td>
@@ -39,7 +39,7 @@
               <td data-title="Nombre"> Not Editable </td>
               <td data-title=""> 0 </td>
               <td data-title=""> 0 </td>
-            </tr>
+            </tr> -->
           </tbody>
         <!-- <td class="editable-cell">
           <div class="editable-field">
@@ -53,8 +53,11 @@
           <input type="number" id="Size" min="3" max="5" required>
           <button id="Start">Empezar</button>
           
+          <div id="Deletediv">
+            <button id="Delete">Borrar datos</button>
+          </div>
         </div>
-          <button id="Stop">Reanudar</button>
+          <button id="Stop">Reiniciar partida</button>
       </div>
       
       <div class="Carrusel">
@@ -107,7 +110,8 @@
       
     </div>
     
-    <div id="Ficha">
+    <div id="Fichadiv">
+      <div id="Ficha"> </div>
       <button id="GameButton">Sacar ficha</button>
     </div>
 
