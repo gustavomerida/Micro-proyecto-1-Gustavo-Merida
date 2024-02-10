@@ -7,18 +7,109 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <div id="header">
+    <h1>Super Bingo</h1>
+    <h2 id="turn">Turno: 0</h2>
 
+  </div>
+    
     <div id="main">
-      <h1>Super Bingo</h1>
-      <h2 id="score">0</h2>
-
-      
-      <!-- 3x3 board -->
-      <div id="board">
-        <div id="matrix"></div>
+      <div id="izquierda">
+        <h2> Puntaje acumulado:</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Victorias</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="players-table">
+            <tr>
+              <td data-title="Nombre"> Not Editable </td>
+              <td data-title=""> 0 </td>
+              <td data-title=""> 0 </td>
+            </tr>
+            <tr>
+              <td data-title="Nombre"> Not Editable </td>
+              <td data-title=""> 0 </td>
+              <td data-title=""> 0 </td>
+            </tr>
+            <tr>
+              <td data-title="Nombre"> Not Editable </td>
+              <td data-title=""> 0 </td>
+              <td data-title=""> 0 </td>
+            </tr>
+          </tbody>
+        <!-- <td class="editable-cell">
+          <div class="editable-field">
+            <input class="editable-input" type="text" value="Other" placeholder="Click The Edit Icon" readonly/>
+            <i class="fa fa-pencil-square-o edit-button"></i>
+          </div>
+        </td> -->
+        </table>
+        <div id="barra">
+          <label>Tamaño de cartas:</label>
+          <input type="number" id="Size" min="3" max="5" required>
+          <button id="Start">Empezar</button>
+          
+        </div>
+          <button id="Stop">Reanudar</button>
       </div>
+      
+      <div class="Carrusel">
+        <div id="conteItemsCarrusel">
+
+          <div class="itemCarrusel" id="ic1">
+            <div class="boards" id="board">
+              <div id="matrix"></div>
+            </div>
+            <div class="flechasCarrusel">
+              <a href="#ic4"><i>I</i></a>
+              <a href="#ic2"><i>D</i></a>
+            </div>
+          </div>
+
+          <div class="itemCarrusel" id="ic2">
+            <div class="boards" id="board-2">
+              <div id="matrix"></div>
+            </div>
+            <div class="flechasCarrusel">
+              <a href="#ic1" class="izq"><i>I</i></a>
+              <a href="#ic3"><i>D</i></a>
+            </div>
+          </div>
+
+
+          <div class="itemCarrusel" id="ic3">
+            <div class="boards" id="board-3">
+              <div id="matrix"></div>
+            </div>
+            <div class="flechasCarrusel">
+              <a href="#ic2"><i>I</i></a>
+              <a href="#ic4"><i>D</i></a>
+            </div>
+          </div>
+
+          <div class="itemCarrusel" id="ic4">
+            <div class="boards" id="board-4">
+              <div id="matrix"></div>
+            </div>
+            <div class="flechasCarrusel">
+              <a href="#ic3"><i>I</i></a>
+              <a href="#ic1"><i>D</i></a>
+            </div>
+          </div>
+          
+      
+        </div>
+      </div>
+      
     </div>
     
+    <div id="Ficha">
+      <button id="GameButton">Sacar ficha</button>
+    </div>
 
     <div id="container">
         <h1>Super Bingo</h1>
@@ -38,7 +129,7 @@
             <label for="boardSize">Tamaño de cartas (3-5):</label>
             <input type="number" id="boardSize" min="3" max="5" required>
             
-            <button type="submit" id="startGame">Start Game</button>
+            <button type="submit" id="startGame">Empezar</button>
         </form>
     </div>
 
