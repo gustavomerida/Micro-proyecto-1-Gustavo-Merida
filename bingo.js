@@ -1,8 +1,12 @@
 let gamedata = {
     turno: 0,
-    puntos:{},
+    puntos: {},
+    matrices: {},
     fichas_sacadas: []
 };
+
+let matrices = {};
+
 document.addEventListener("DOMContentLoaded", function() {
     let storedPlayers = JSON.parse(localStorage.getItem("jugadores"));
     if (storedPlayers) {
@@ -16,27 +20,30 @@ document.addEventListener("DOMContentLoaded", function() {
         boards[i].style.display = "grid";
       }
       player1 = storedPlayers.jugador1;
-      drawCard(0, player1.nombre, "board");
-      drawCard(0, storedPlayers.jugador2.nombre, "board-2");
-      drawCard(0, storedPlayers.jugador3.nombre, "board-3");
-      drawCard(0, storedPlayers.jugador4.nombre, "board-4");
+      drawCard(0, player1, "board");
+      drawCard(0, storedPlayers.jugador2, "board-2");
+      drawCard(0, storedPlayers.jugador3, "board-3");
+      drawCard(0, storedPlayers.jugador4, "board-4");
       drawTable(storedPlayers);
       document.getElementById("Fichadiv").style.display = "none";
       document.getElementById("Ficha").innerHTML = "   ";
+      localStorage.setItem("jugadores", JSON.stringify(storedPlayers));
       
     document.getElementById('Start').addEventListener("click", function() {
             // Código a ejecutar cuando se haga clic en el botón
             let boardSize = document.getElementById('Size').value;
             if (boardSize) {
-                
-                drawCard(boardSize, storedPlayers.jugador1.nombre, "board");
-                drawCard(boardSize, storedPlayers.jugador2.nombre, "board-2");
-                drawCard(boardSize, storedPlayers.jugador3.nombre, "board-3");
-                drawCard(boardSize, storedPlayers.jugador4.nombre, "board-4");
+                distribuirCartones(storedPlayers, boardSize);
+                drawCard(boardSize, storedPlayers.jugador1, "board");
+                drawCard(boardSize, storedPlayers.jugador2, "board-2");
+                drawCard(boardSize, storedPlayers.jugador3, "board-3");
+                drawCard(boardSize, storedPlayers.jugador4, "board-4");
                 drawTable(storedPlayers);
                 document.getElementById("Stop").style.display = "block";
                 document.getElementById("barra").style.display = "none"; 
-                document.getElementById("Fichadiv").style.display = "block";  
+                document.getElementById("Fichadiv").style.display = "block"; 
+                
+                localStorage.setItem("jugadores", JSON.stringify(storedPlayers)); 
             }
         });
         
@@ -44,7 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Código a ejecutar cuando se haga clic en el botón Reanudar
             gamedata = {
                 turno: 0,
-                puntos:{},
+                puntos: {},
+                matrices: {},
                 fichas_sacadas: []
             };
             document.getElementById("header").innerHTML = `<h1 id="title-game">Super Bingo</h1>
@@ -53,11 +61,12 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("barra").style.display = "block";
             document.getElementById("Fichadiv").style.display = "none";
             document.getElementById("Ficha").innerHTML = "   ";
-            drawCard(boardSize, storedPlayers.jugador1.nombre, "board");
-            drawCard(boardSize, storedPlayers.jugador2.nombre, "board-2");
-            drawCard(boardSize, storedPlayers.jugador3.nombre, "board-3");
-            drawCard(boardSize, storedPlayers.jugador4.nombre, "board-4");
+            drawCard(boardSize, storedPlayers.jugador1, "board");
+            drawCard(boardSize, storedPlayers.jugador2, "board-2");
+            drawCard(boardSize, storedPlayers.jugador3, "board-3");
+            drawCard(boardSize, storedPlayers.jugador4, "board-4");
             drawTable(storedPlayers);
+            localStorage.setItem("jugadores", JSON.stringify(storedPlayers));
         });
       
     } else {
@@ -78,18 +87,30 @@ document.addEventListener("DOMContentLoaded", function() {
         // Crear objetos de jugador
         let player1 = {
           nombre: document.getElementById('player1').value,
+          puntaje: 0,
+          victorias: 0,
+          puntos: 0,
           // Otras características del jugador
         };
         let player2 = {
           nombre: document.getElementById('player2').value,
+          puntaje: 0,
+          victorias: 0,
+          puntos: 0,
           // Otras características del jugador
         };
         let player3 = {
             nombre: document.getElementById('player3').value,
+            puntaje: 0,
+            victorias: 0,
+            puntos: 0,
             // Otras características del jugador
         };
         let player4 = {
             nombre: document.getElementById('player4').value,
+            puntaje: 0,
+            victorias: 0,
+            puntos: 0,
             // Otras características del jugador
         };
         
@@ -105,14 +126,16 @@ document.addEventListener("DOMContentLoaded", function() {
             // Código a ejecutar cuando se haga clic en el botón
             let boardSize = document.getElementById('Size').value;
             if (boardSize) {
-                drawCard(boardSize, Players.jugador1.nombre, "board");
-                drawCard(boardSize, Players.jugador2.nombre, "board-2");
-                drawCard(boardSize, Players.jugador3.nombre, "board-3");
-                drawCard(boardSize, Players.jugador4.nombre, "board-4");
+                distribuirCartones(Players, boardSize);
+                drawCard(boardSize, Players.jugador1, "board");
+                drawCard(boardSize, Players.jugador2, "board-2");
+                drawCard(boardSize, Players.jugador3, "board-3");
+                drawCard(boardSize, Players.jugador4, "board-4");
                 drawTable(Players);
                 document.getElementById("Stop").style.display = "block";
                 document.getElementById("barra").style.display = "none"; 
                 document.getElementById("Fichadiv").style.display = "block";
+                localStorage.setItem("jugadores", JSON.stringify(Players));
             }
         });
                
@@ -120,7 +143,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Código a ejecutar cuando se haga clic en el botón Reanudar
             gamedata = {
                 turno: 0,
-                puntos:{},
+                puntos: {},
+                matrices: {},
                 fichas_sacadas: []
             };
             document.getElementById("header").innerHTML = `<h1 id="title-game">Super Bingo</h1>
@@ -130,17 +154,20 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("Deletediv").style.display = "block";
             document.getElementById("Fichadiv").style.display = "none";
             document.getElementById("Ficha").innerHTML = "   ";
-            drawCard(0, Players.jugador1.nombre, "board");
-            drawCard(0, Players.jugador2.nombre, "board-2");
-            drawCard(0, Players.jugador3.nombre, "board-3");
-            drawCard(0, Players.jugador4.nombre, "board-4");
+            drawCard(0, Players.jugador1, "board");
+            drawCard(0, Players.jugador2, "board-2");
+            drawCard(0, Players.jugador3, "board-3");
+            drawCard(0, Players.jugador4, "board-4");
             drawTable(Players);
+            localStorage.setItem("jugadores", JSON.stringify(Players));
         });
-        drawCard(parseInt(boardSize), player1.nombre, "board");
-        drawCard(parseInt(boardSize), Players.jugador2.nombre, "board-2");
-        drawCard(parseInt(boardSize), Players.jugador3.nombre, "board-3");
-        drawCard(parseInt(boardSize), Players.jugador4.nombre, "board-4");
+        distribuirCartones(Players, parseInt(boardSize));
+        drawCard(parseInt(boardSize), player1, "board");
+        drawCard(parseInt(boardSize), Players.jugador2, "board-2");
+        drawCard(parseInt(boardSize), Players.jugador3, "board-3");
+        drawCard(parseInt(boardSize), Players.jugador4, "board-4");
         drawTable(Players);
+        localStorage.setItem("jugadores", JSON.stringify(storedPlayers));
         // Mostrar los elementos necesarios para empezar el juego
         document.getElementById("container").style.display = "none";
         document.getElementById("header").style.display = "block";
@@ -181,8 +208,15 @@ function createMatrix (n){
 }
 
 function drawCard (size, player, card){
-    let matriz = createMatrix(size);
-    document.getElementById(`${card}`).innerHTML = `<div class="name">${player}</div>`;
+    let playerr = player.nombre;
+    let matriz = player.carton;
+    if(!matriz || size==0){
+        matriz = createMatrix(size);
+    }else{
+        
+    }
+    console.log(player);
+    document.getElementById(`${card}`).innerHTML = `<div class="name">${playerr}</div>`;
     document.getElementById(`${card}`).innerHTML += `<div id="matrix${card}"></div>`;
     let matrizHTML = document.getElementById(`matrix${card}`);
     matrizHTML.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -190,25 +224,32 @@ function drawCard (size, player, card){
 }
 
 function drawTable(players){
+    if (!players.jugador1.victorias){
+            players.jugador1.victorias = 0;
+    }  
+    if (!players.jugador1.puntos){
+        players.jugador1.puntos = 0;
+    }  
+        
     document.getElementById("players-table").innerHTML = `<tr>
     <td data-title="Nombre">${players.jugador1.nombre}</td>
-    <td data-title=""> 0 </td>
-    <td data-title=""> 0 </td>
+    <td data-title=""> ${players.jugador1.victorias} </td>
+    <td data-title=""> ${players.jugador1.puntos} </td>
   </tr>
   <tr>
     <td data-title="Nombre">${players.jugador2.nombre}</td>
-    <td data-title=""> 0 </td>
-    <td data-title=""> 0 </td>
+    <td data-title="">${players.jugador2.victorias}</td>
+    <td data-title="">${players.jugador2.puntos}</td>
   </tr>
   <tr>
     <td data-title="Nombre">${players.jugador3.nombre}</td>
-    <td data-title=""> 0 </td>
-    <td data-title=""> 0 </td>
+    <td data-title="">${players.jugador3.victorias}</td>
+    <td data-title="">${players.jugador3.puntos}</td>
   </tr>
   <tr>
     <td data-title="Nombre">${players.jugador4.nombre}</td>
-    <td data-title=""> 0 </td>
-    <td data-title=""> 0 </td>
+    <td data-title="">${players.jugador4.victorias}</td>
+    <td data-title="">${players.jugador4.puntos}</td>
   </tr>`
 }
 
@@ -249,6 +290,7 @@ document.getElementById("Delete").addEventListener("click", function() {
   });
 
 document.getElementById("GameButton").addEventListener("click", function() {
+    // console.log(gamedata);
     //Aumentar un turno (Son máximo 25)
     gamedata.turno += 1;
     // console.log(gamedata.turno);
@@ -268,25 +310,237 @@ document.getElementById("GameButton").addEventListener("click", function() {
     //Verificar matrices y cartones para ver si salio una ficha que algún jugador tenga en su carton.
     let tokens = document.getElementsByClassName("token");
     let tokensArray = Array.from(tokens); // Otra forma: let tokensArray = [...tokens];
-    console.log(gamedata.fichas_sacadas);
+    // console.log(gamedata.fichas_sacadas);
     
     // console.log(tokensArray);
     tokensArray.forEach(function(token) {
         if(gamedata.fichas_sacadas.includes(parseInt(token.textContent))){
-            console.log(token);
+            // console.log(token);
             token.classList.add('tachado');
             // token.style.backgroundColor = "#545454";
         }    
     });
     //calcular si se consiguió una nueva línea o cartón lleno.
+    let players;
+    let storedPlayers = JSON.parse(localStorage.getItem("jugadores"));
+    if(storedPlayers){
+        players = storedPlayers;
+    }else{
+        players= Players;
+    }
+    let bingo = []
+    calcularPuntos(gamedata, players, bingo); //corregir
 
-    //validar cada uno de los números obtenidos de forma que no aparezcan números repetidos.
+    if (bingo.length>0){
+        let ps = {};
+        for (let player in players){
+            ps[player]= player.puntos;
+        }
+        
+        finalizarPartida(ps, "Se alcanzó el límite de turnos!", players, bingo);
+    }
     
     //El juego durará cómo máximo 25 turnos, pero si alguien consigue cartón lleno se termina.
+    if(gamedata.turno==25){
+        let ps = {};
+        for (let player in players){
+            ps[player]= player.puntos;
+        }
+        
+        finalizarPartida(ps, "Se alcanzó el límite de turnos!", players, bingo);
+    }
 
 });
 
 
+function calcularPuntos(gamedata, storedPlayers, bingo){
+    // let cont = 0;
+    // let keys = Object.keys(gamedata[matrices]);
+    // for (let matriz in gamedata[matrices]) {
+        
+    //     //diagonalmente
+    //     let selected = true;
+    //     let results = [];
+    //     for (let i = 0; i < matriz.length; i++) {
+    //         if(gamedata.matriz[i][i]){
+    //             results.push(1);
+    //         }else{
+    //             results.push(0);
+    //         };
+    //       }
+    //     console.log(results);
+    //     if (results.includes(0)){
+    //         // pass;
+    //     }else{
+    //         gamedata[puntos][gamedata[matrices][keys[cont]]];
+    //     }
+    //     cont++;
+    //   }
+
+    // let keys = Object.keys(matrices);
+    // for(let matriz in keys){
+    //     let results = [];
+    //     for (let i = 0; i < matriz.length; i++) {
+    //         if(gamedata.fichas_sacadas.includes(matriz[i][i])){
+    //             results.push(1);
+    //         }else{
+    //             results.push(0);
+    //         };
+    //       }
+    //     console.log(results);
+    // }
+
+    let puntosLinea = 1;
+    let puntosCarton = 5;
+    let puntosDiagonal = 3;
+    
+    for (let jugador in storedPlayers) {
+        let carton = storedPlayers[jugador].carton;
+        console.log(storedPlayers[jugador]);
+        let puntos = 0;
+        // Verificar si se ha completado una línea horizoltal
+        for (let i = 0; i < carton.length; i++) {
+            let lineaCompleta = true;
+            for (let j = 0; j < carton[i].length; j++) {
+                if (!gamedata.fichas_sacadas.includes(carton[i][j])) {
+                    lineaCompleta = false;
+                break;
+                }
+            }
+            if (lineaCompleta) {
+                puntos += puntosLinea;
+            }
+        }
+
+        // Verificar si se ha completado una línea vertical.
+        for (let k = 0; k < carton.length; k++) {
+            let lineaCompleta = true;
+            for (let l = 0; l < carton[k].length; l++) {
+                if (!gamedata.fichas_sacadas.includes(carton[l][k])) {
+                    lineaCompleta = false;
+                break;
+                }
+            }
+            if (lineaCompleta) {
+                puntos += puntosLinea;
+            }
+        }
+
+        // Verificar si se ha completado una diagonal
+        let lineaCompleta = true;
+
+        for (let m=0; m<carton.length; m++) {
+            if (!gamedata.fichas_sacadas.includes(carton[m][m])) {
+                lineaCompleta = false;
+                break;
+            }
+            
+        }
+        if (lineaCompleta) {
+            puntos += puntosDiagonal;
+            console.log("logrado1");
+        }
+
+        // Verificar si se ha completado una diagonal hacia arriba
+        for (let o = carton.length -1; o >=0; o--) {
+            if (!gamedata.fichas_sacadas.includes(carton[o][carton.length -1 - o])) {
+                lineaCompleta = false;
+                break;
+            }
+            
+        }
+        if (lineaCompleta) {
+            puntos += puntosDiagonal;
+            console.log("logrado2");
+        }
+
+        // Verificar si se ha completado el cartón
+        let cartonCompleto = true;
+        for (let i = 0; i < carton.length; i++) {
+            for (let j = 0; j < carton[i].length; j++) {
+                if (!gamedata.fichas_sacadas.includes(carton[i][j])) {
+                cartonCompleto = false;
+                break;
+                }
+            }
+            if (!cartonCompleto) {
+                break;
+            }
+        }
+        if (cartonCompleto) {
+            puntos = puntosCarton;
+            bingo.push(storedPlayers[jugador].nombre);
+        }
+        storedPlayers[jugador].puntos = puntos;
+        
+  }
+  
+  drawTable(storedPlayers);
+}
+
+function finalizarPartida(storedPlayers, mensaje, sp, bingo){
+    let players = storedPlayers;
+    let playerspoints = new Object();
+    let winner = "nadie";
+
+    //Selección de ganador y resultados:
+    if (bingo.length!=0){
+        if (bingo.length==1){
+            winner = bingo[0];
+        }else{
+            winner= bingo;
+        }
+    }else{
+        console.log(`antes: ${JSON.stringify(sp)}`);
+        let sortedPlayers = Object.entries(sp).sort((a, b) => b[1].puntos - a[1].puntos);
+        let highestScore = sortedPlayers[0][1].puntos;
+        let winners = sortedPlayers.filter(player => player[1].puntos === highestScore).map(player => player[1].nombre);
+        if (winners.length === 1) {
+            console.log(`El ganador es ${winners[0]} con ${highestScore} puntos.`);
+        } else {
+            console.log(`Hay un empate entre ${winners.join(" y ")} con ${highestScore} puntos.`);
+        }
+        console.log(`después: ${sortedPlayers}`);
+    }
+
+    
+    
+
+    // for (const key in players) {
+
+    //     //Obtenemos la nueva key deseada. Que es el valor. 
+    //     let nuevaKey = players[key]
+    //     //Si el acumulador no contiene la nueva clave, la creamos y 
+    //     // la inicializamos con un arreglo vacio. 
+    //     if (!playerspoints.hasOwnProperty(nuevaKey)){
+    //         playerspoints[nuevaKey] = [];
+    //     }       
+    //     //Agregamos la key anterior al arreglo. 
+    //     playerspoints[nuevaKey].push(key)
+
+
+    // }
+
+    // playerspoints.sort((a, b) => b.puntos - a.puntos);
+
+    //Se borran los puntos.
+    console.log(mensaje + `ganó ${winner}`);
+    for (let jugador in sp){
+        sp[jugador].puntos = 0;
+    }
+    localStorage.setItem("jugadores", JSON.stringify(sp));
+
+    // if (!players.jugador1.victorias){
+    //     players.jugador1.victorias = 0;
+    // }  
+    // if (!players.jugador1.puntos){
+    //     players.jugador1.puntos = 0;
+    // }
+    drawTable(sp);
+}
+
+    
+    
 /*let player1 = {};
 let player2= {};
 let player3= {};
@@ -382,3 +636,11 @@ function save_LocalStorage(player1, player2, player3, player4){
     localStorage.setItem("player3", JSON.stringify(player3));
     localStorage.setItem("player4", JSON.stringify(player4));
 }*/
+
+function distribuirCartones(list, n){
+    matrices= [createMatrix(n), createMatrix(n), createMatrix(n), createMatrix(n)];
+    list.jugador1.carton = matrices[0];
+    list.jugador2.carton = matrices[1];
+    list.jugador3.carton = matrices[2];
+    list.jugador4.carton = matrices[3];
+}
