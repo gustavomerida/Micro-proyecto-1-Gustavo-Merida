@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Bingo</title>
     <link rel="stylesheet" href="./styles.css">
+    <script src="https://kit.fontawesome.com/b99ea58a2d.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="header">
@@ -24,28 +25,8 @@
             </tr>
           </thead>
           <tbody id="players-table">
-            <!-- <tr>
-              <td data-title="Nombre"> Not Editable </td>
-              <td data-title=""> 0 </td>
-              <td data-title=""> 0 </td>
-            </tr>
-            <tr>
-              <td data-title="Nombre"> Not Editable </td>
-              <td data-title=""> 0 </td>
-              <td data-title=""> 0 </td>
-            </tr>
-            <tr>
-              <td data-title="Nombre"> Not Editable </td>
-              <td data-title=""> 0 </td>
-              <td data-title=""> 0 </td>
-            </tr> -->
           </tbody>
-        <!-- <td class="editable-cell">
-          <div class="editable-field">
-            <input class="editable-input" type="text" value="Other" placeholder="Click The Edit Icon" readonly/>
-            <i class="fa fa-pencil-square-o edit-button"></i>
-          </div>
-        </td> -->
+
         </table>
         <div id="barra">
           <label>Tamaño de cartas:</label>
@@ -67,8 +48,8 @@
               <div id="matrix"></div>
             </div>
             <div class="flechasCarrusel">
-              <a href="#ic4"><i>I</i></a>
-              <a href="#ic2"><i>D</i></a>
+              <a href="#ic4"><i class="fa-solid fa-arrow-left"></i></a>
+              <a href="#ic2"><i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
 
@@ -77,8 +58,8 @@
               <div id="matrix"></div>
             </div>
             <div class="flechasCarrusel">
-              <a href="#ic1" class="izq"><i>I</i></a>
-              <a href="#ic3"><i>D</i></a>
+              <a href="#ic1" class="izq"><i class="fa-solid fa-arrow-left"></i></a>
+              <a href="#ic3"><i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
 
@@ -88,8 +69,8 @@
               <div id="matrix"></div>
             </div>
             <div class="flechasCarrusel">
-              <a href="#ic2"><i>I</i></a>
-              <a href="#ic4"><i>D</i></a>
+              <a href="#ic2"><i class="fa-solid fa-arrow-left"></i></a>
+              <a href="#ic4"><i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
 
@@ -98,8 +79,8 @@
               <div id="matrix"></div>
             </div>
             <div class="flechasCarrusel">
-              <a href="#ic3"><i>I</i></a>
-              <a href="#ic1"><i>D</i></a>
+              <a href="#ic3"><i class="fa-solid fa-arrow-left"></i></a>
+              <a href="#ic1"><i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
           
@@ -135,18 +116,6 @@
             <button type="submit" id="startGame">Empezar</button>
         </form>
     </div>
-
-    <!-- <div id="juego">
-        <div class="carton cartonJugador">
-          <div class="etiqueta">Player</div>
-        </div>
-        <div id="bingo">
-          <div id="bola"></div>
-          <button onClick="sacarBola();">SACAR BOLA</button>
-        </div>
-        <div class="carton cartonCpu">
-          <div class="etiqueta">CPU</div></div>
-      </div> -->
 
     <script src="bingo.js"> </script>
 </body>

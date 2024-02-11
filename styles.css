@@ -156,9 +156,6 @@ thead tr{
   background-color: #7c7c7c;
 }
 
-/* thead th{
-  
-} */
 
 tbody tr:nth-child(even){
   background-color: #eaeaea;
@@ -199,8 +196,12 @@ td{
   align-items: center;
   justify-content: space-between;
 
-  background-color: #cccccc00;
+  background-color: #00000000;
   color: #ccc;
+}
+
+i{
+  background-color: #000;
 }
 
 .itemCarrusel{
@@ -221,15 +222,6 @@ div.flechasCarrusel a {
 
 
 #Ficha{
-  /* background: #e0e4cc;
-  justify-content: center;
-  text-align: center;
-  width: 50px;
-  margin: 10px auto;
-  margin-bottom: -5px;
-  padding: 20px 20px;
-  border: 0.5px solid greenyellow;
-  border-radius: 20px; */
 
   background-color: #FFD700; /* Color de fondo amarillo */
   width: 50px;
@@ -251,81 +243,19 @@ div.flechasCarrusel a {
   margin: 30px auto;
 } 
 
-
-/* .editable-cell{
-  transition: .3s all linear;
+#Stop{
+  margin: 20px auto;
 }
 
-.editable-field{
+#main {
   display: flex;
   justify-content: space-between;
-
+  flex-wrap: wrap;
+  flex-direction: row; /* Dirección por defecto (horizontal) */
 }
 
-.editable-input{
-  border: none;
-  font-size: inherit;
-  background: inherit;
-  color: inherit;
-  transition: .3s all linear;
+@media (max-width: 768px) {
+  #main {
+    flex-direction: column; /* Cambiar a dirección vertical si el ancho es menor a 768px */
+  }
 }
-
-.editable-input:focus{
-    outline: none;
-    background: white;
-    color: #545454;
-}
-  
-.edit-button{
-  cursor: pointer;
-  font-size: 5em;
-  position: relative;
-  top: 5px;
-} */
-
-
-/* #juego{
-    display:flex;
-    width: 800px;
-    margin: auto;
-  }
-  
-  #juego > div{
-    border:1px solid #000;
-    width: 33%;
-  }
-  .carton{
-    margin:auto;
-    text-align: center;
-  }
-  .numero{
-    display:inline-block;
-    border:1px solid #000;
-    width: 45px;
-    line-height: 45px;
-    margin: 1px;
-    text-align:center;  
-  }
-  .tachado{
-    color: #fff;
-    background-color: #000;
-    
-  }
-  #bingo{
-    text-align: center;
-  }
-  #bola{
-    font-size:50px;
-    display:block;
-    margin: 20px auto;
-    width: 5rem;
-    line-height: 5rem;
-    border-radius: 50%;
-    background-color: #000;
-    color: #FFF;
-    text-align:center;
-  }
-  .etiqueta{
-    text-align:center;
-    margin: 10px auto;
-  } */
