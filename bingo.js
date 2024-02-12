@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("barra").style.display = "none";
         document.getElementById("Fichadiv").style.display = "block";
 
+    
         document.getElementById('Start').addEventListener("click", function() {
             // Código a ejecutar cuando se haga clic en el botón
             let boardSize = document.getElementById('Size').value;
@@ -190,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let boards= document.getElementsByClassName("boards");
         for(let i=0; i< boards.length; i++){
             boards[i].style.display = "grid"
-        }
+        }   
       });
     }
   });
@@ -451,7 +452,7 @@ function calcularPuntos(gamedata, storedPlayers, bingo){
             }
         }
         if (cartonCompleto) {
-            puntos = puntosCarton;
+            puntos += puntosCarton;
             bingo.push(storedPlayers[jugador].nombre);
             storedPlayers[jugador].victorias +=1;
         }
@@ -471,12 +472,13 @@ function finalizarPartida(storedPlayers, mensaje, sp, bingo){
     if (bingo.length!=0){
         if (bingo.length==1){
             winner = bingo[0];
-            alert(`Bingo!! ${winner}llenó su cartón.`);
+            alert(`Bingo!! ${winner} llenó su cartón.`);
         }else{
-            alert(`Bingo!!`);
+            let msj = "";
             for(let i=0;i<bingo.length;i++){
-                alert(`${bingo[i]}llenó su cartón.`);
+                msj+= `${bingo[i]} llenó su cartón.\n`
             }
+            alert(`Bingo!! ${msj}`);
         }
     }else{
         let sortedPlayers = Object.entries(sp).sort((a, b) => b[1].puntos - a[1].puntos);
